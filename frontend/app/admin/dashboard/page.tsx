@@ -1,1 +1,5 @@
-import Portal from"@/components/dashboard/Portal";export default function Page(){return <Portal role="admin"/>}
+import AdminDashboard from "@/components/admin/AdminDashboard";
+
+export default function Page() {
+  return <AdminDashboard />;
+}
