@@ -1,18 +1,1 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "TravelMagnet",
-  description: "TravelMagnet Hotel Booking",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
-}
+import type{Metadata}from"next";import"./globals.css";export const metadata:Metadata={title:"TravelMagnet | Trusted Indian Hotel Booking",description:"Search verified hotels with transparent prices and real availability."};const script=`try{document.documentElement.classList.toggle('dark',localStorage.getItem('travelmagnet-theme')==='dark')}catch(e){}`;export default function Layout({children}:{children:React.ReactNode}){return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{__html:script}}/></head><body>{children}</body></html>}
