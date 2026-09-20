@@ -1,1 +1,1 @@
-import BookingConfirmation from "@/components/booking/BookingConfirmation";export default function ConfirmationPage(){return <BookingConfirmation/>}
+import{Suspense}from"react";import BookingConfirmation from "@/components/booking/BookingConfirmation";export default function ConfirmationPage(){return <Suspense fallback={<main className="min-h-screen"/>}><BookingConfirmation/></Suspense>}

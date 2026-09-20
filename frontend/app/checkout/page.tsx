@@ -1,1 +1,1 @@
-import Checkout from "@/components/booking/Checkout";export default function CheckoutPage(){return <Checkout/>}
+import{Suspense}from"react";import Checkout from "@/components/booking/Checkout";export default function CheckoutPage(){return <Suspense fallback={<main className="min-h-screen"/>}><Checkout/></Suspense>}

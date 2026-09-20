@@ -1,0 +1,12 @@
+const express=require("express"),cors=require("cors"),helmet=require("helmet"),cookie=require("cookie-parser"),rateLimit=require("express-rate-limit");
+const auth=require("./routes/authRoutes"),platform=require("./routes/platformRoutes"),operations=require("./routes/operationsRoutes"),system=require("./routes/systemRoutes"),{checkout,webhook}=require("./controllers/paymentController"),{protect,authorize}=require("./middleware/auth"),{notFound,error}=require("./middleware/error");
+const app=express(),origins=(process.env.CLIENT_URL||"http://localhost:3000").split(",");
+app.use(helmet());app.use(cors({origin:(origin,callback)=>!origin||origins.includes(origin)?callback(null,true):callback(new Error("CORS denied")),credentials:true}));
+app.post("/api/payments/webhook",express.raw({type:"application/json",limit:"1mb"}),webhook);
+app.use(express.json({limit:"1mb"}));app.use(cookie());app.use((req,res,next)=>{if(["POST","PUT","PATCH","DELETE"].includes(req.method)&&req.headers.origin&&!origins.includes(req.headers.origin))return res.status(403).json({success:false,code:"ORIGIN_DENIED",message:"Request origin is not allowed"});next()});
+app.use("/api/auth",rateLimit({windowMs:900000,limit:100}),auth);
+app.get("/api/health",(req,res)=>res.json({ok:true,service:"TravelMagnet API"}));
+app.post("/api/payments/create-checkout-session",protect,authorize("user"),checkout);
+app.use("/uploads",express.static(require("path").join(process.cwd(),"uploads"),{fallthrough:false,maxAge:process.env.NODE_ENV==="production"?"7d":0}));
+app.use("/api",system);app.use("/api",operations);app.use("/api",platform);app.use(notFound);app.use(error);
+module.exports=app;

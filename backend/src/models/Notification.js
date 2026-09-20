@@ -1,0 +1,1 @@
+const mongoose=require("mongoose");const schema=new mongoose.Schema({user:{type:mongoose.Schema.Types.ObjectId,ref:"User",required:true,index:true},channel:{type:String,default:"in_app"},type:String,title:String,message:String,data:mongoose.Schema.Types.Mixed,status:{type:String,default:"sent"},readAt:Date},{timestamps:true});module.exports=mongoose.model("Notification",schema);
