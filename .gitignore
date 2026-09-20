@@ -1,24 +1,19 @@
-cat > .gitignore << EOF
-# Dependencies
+# Dependencies and build output
 node_modules/
-
-# Build folders
+.next/
 dist/
 build/
-.next/
+*.tsbuildinfo
 
-# Environment files
+# Local configuration and credentials
 .env
-.env.local
+.env.*
+!.env.example
+.vercel/
 
-# Logs
+# Logs and editor files
 *.log
-
-# IDE
 .vscode/
 .idea/
-
-# OS files
 .DS_Store
 Thumbs.db
-EOF
