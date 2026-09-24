@@ -7,7 +7,9 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "node --test",
-    "seed": "node src/scripts/seed.js && node src/scripts/securitySeed.js"
+    "seed": "node src/scripts/seed.js && node src/scripts/securitySeed.js",
+    "import:google-hotels": "node src/scripts/importGoogleHotels.js",
+    "seed:demo-hotels": "node src/scripts/demoHotelsSeed.js"
   },
   "keywords": [
     "travelmagnet",
